@@ -37,9 +37,14 @@ def generate_map():
     """
     global map_data
     
+    # Get canvas dimensions from request or use defaults
+    # Frontend will send these via query params if available
+    canvas_width = request.args.get('width', default=950, type=int)
+    canvas_height = request.args.get('height', default=800, type=int)
+    
     node_count = 24
-    width = 950
-    height = 800
+    width = canvas_width
+    height = canvas_height
 
     nodes = generate_nodes(node_count, width, height)
     edges = generate_edges(nodes)

@@ -13,19 +13,16 @@ window.onload = function() {
 
     const resetPathButton = document.getElementById("reset-path-btn");
 
-    // Set canvas width and height to match its display size
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-
+    // Declare variables first
     let mapData = null;
     let startNode = null; 
-    let endNode = null; 
-
+    let endNode = null;
+    
     // Default Values 
     let algorithm = "dijkstra"; 
     let travelMode = "car"; 
-    let selectedPriority = 'distance'; 
-
+    let selectedPriority = 'distance';
+    
     let imgHouse = new Image();
     imgHouse.src = '/static/img/house-big.png'; 
     let imgSize = 64; 
@@ -58,7 +55,10 @@ window.onload = function() {
 
     generateMapButton.addEventListener("click", async function getMapData() {
         try {
-            const response = await fetch('/generate_map');
+            // Get current canvas dimensions for responsive map generation
+            const canvasWidth = canvas.offsetWidth;
+            const canvasHeight = canvas.offsetHeight;
+            const response = await fetch(`/generate_map?width=${canvasWidth}&height=${canvasHeight}`);
             mapData = await response.json();
             console.log("DATA", mapData); // The map data from the server
             drawMap(mapData); // Pass the data to the drawMap function
@@ -226,19 +226,33 @@ window.onload = function() {
     });
     }
 
-    canvas.addEventListener('click', (event) => {
+    // Handle both click and touch events for mobile support
+    function handleCanvasInteraction(event) {
         if (!mapData) {
             alert("Please generate a map first.");
             return;
         }
 
+        // Prevent default touch behavior (scrolling, zooming)
+        if (event.type === 'touchstart' || event.type === 'touchend') {
+            event.preventDefault();
+        }
+
         const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        // Get coordinates from either mouse or touch event
+        const clientX = event.clientX || (event.touches && event.touches[0]?.clientX) || (event.changedTouches && event.changedTouches[0]?.clientX);
+        const clientY = event.clientY || (event.touches && event.touches[0]?.clientY) || (event.changedTouches && event.changedTouches[0]?.clientY);
+        
+        if (!clientX || !clientY) return;
+        
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
 
         const clickedNode = mapData.nodes.find(node => {
             const distance = Math.sqrt(Math.pow(node.x - x, 2) + Math.pow(node.y - y, 2));
-            return distance < 10;
+            // Increase touch target size on mobile
+            const touchThreshold = window.innerWidth <= 768 ? 20 : 10;
+            return distance < touchThreshold;
         });
 
         if (clickedNode) {
@@ -256,7 +270,11 @@ window.onload = function() {
                 // Now the user can click the "Calculate Path" button
             }
         }
-    });
+    }
+    
+    // Add event listeners for both mouse and touch
+    canvas.addEventListener('click', handleCanvasInteraction);
+    canvas.addEventListener('touchend', handleCanvasInteraction);
 
     // A small helper function to draw the selection circle
     function drawSelection(node, color) {
@@ -269,6 +287,32 @@ window.onload = function() {
         ctx.stroke();
         ctx.shadowBlur = 0; // Reset shadow
     }
+    
+    // Function to resize canvas (defined after all dependencies)
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        
+        // Redraw map if it exists
+        if (mapData) {
+            drawMap(mapData);
+            // Redraw path if it exists
+            if (startNode && endNode) {
+                drawSelection(startNode, 'green');
+                drawSelection(endNode, 'red');
+            }
+        }
+    }
+    
+    // Set initial canvas size
+    resizeCanvas();
+    
+    // Handle window resize and orientation change
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('orientationchange', () => {
+        setTimeout(resizeCanvas, 100); // Small delay for orientation change
+    });
 
 
 

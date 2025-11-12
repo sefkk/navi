@@ -335,4 +335,267 @@ h3 {
 
 .map:hover {
     opacity: 0.98;
+}
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr 1.5fr;
+        width: 98%;
+        height: 98%;
+    }
+    
+    h2 {
+        font-size: 2em;
+    }
+    
+    h3 {
+        font-size: 1.3em;
+    }
+    
+    .radio-inputs {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .on-canvas.visible {
+        max-width: 70%;
+        font-size: 1.1em;
+        padding: 15px;
+    }
+}
+
+/* Mobile and Small Tablets */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        padding: 10px;
+    }
+    
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        gap: 15px;
+    }
+    
+    .left {
+        order: 2;
+        max-height: 50vh;
+        overflow-y: auto;
+        padding-bottom: 15px;
+    }
+    
+    .right {
+        order: 1;
+        min-height: 50vh;
+        max-height: 50vh;
+    }
+    
+    h2 {
+        font-size: 1.8em;
+        margin-top: 5px;
+    }
+    
+    h3 {
+        font-size: 1.2em;
+    }
+    
+    .header {
+        margin-top: 10px;
+    }
+    
+    .buttons-div {
+        margin-top: 15px;
+        gap: 12px;
+        width: 90%;
+    }
+    
+    button {
+        width: 80%;
+        padding: 12px;
+        font-size: 0.95em;
+    }
+    
+    .chosing-area {
+        width: 90%;
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    .radio-inputs {
+        width: 100%;
+        max-width: 100%;
+        font-size: 13px;
+        padding: 0.2rem;
+    }
+    
+    .radio-inputs .radio .name {
+        padding: 0.4rem 0.2rem;
+        font-size: 0.9em;
+    }
+    
+    .results {
+        margin-top: 20px;
+        width: 90%;
+        font-size: 0.95em;
+    }
+    
+    .legend {
+        width: 90%;
+        padding: 12px;
+        margin: 10px auto;
+    }
+    
+    .legend h4 {
+        font-size: 1.1em;
+        margin-bottom: 8px;
+    }
+    
+    .legend-item {
+        font-size: 0.8em;
+    }
+    
+    .legend-row {
+        gap: 8px;
+    }
+    
+    .traffic-row {
+        gap: 6px;
+    }
+    
+    .on-canvas.visible {
+        max-width: 85%;
+        font-size: 1em;
+        padding: 15px;
+        line-height: 1.4em;
+    }
+    
+    .map {
+        touch-action: none;
+    }
+}
+
+/* Small Mobile Phones */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .container {
+        gap: 10px;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+    }
+    
+    h3 {
+        font-size: 1.1em;
+    }
+    
+    .header {
+        margin-top: 8px;
+    }
+    
+    .buttons-div {
+        margin-top: 12px;
+        gap: 10px;
+        width: 95%;
+    }
+    
+    button {
+        width: 90%;
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    
+    .chosing-area {
+        width: 95%;
+        padding: 10px;
+        gap: 6px;
+    }
+    
+    .radio-inputs {
+        font-size: 12px;
+    }
+    
+    .radio-inputs .radio .name {
+        padding: 0.35rem 0.15rem;
+        font-size: 0.85em;
+    }
+    
+    .results {
+        margin-top: 15px;
+        width: 95%;
+        font-size: 0.9em;
+    }
+    
+    .legend {
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .legend h4 {
+        font-size: 1em;
+    }
+    
+    .legend-item {
+        font-size: 0.75em;
+    }
+    
+    .color-box {
+        width: 16px;
+        height: 12px;
+        margin-right: 6px;
+    }
+    
+    .legend-row {
+        gap: 6px;
+    }
+    
+    .traffic-row {
+        gap: 4px;
+    }
+    
+    .on-canvas.visible {
+        max-width: 90%;
+        font-size: 0.9em;
+        padding: 12px;
+        line-height: 1.3em;
+    }
+    
+    #reset-path-btn {
+        margin-left: 0;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+    
+    .left {
+        order: 1;
+        max-height: 100vh;
+    }
+    
+    .right {
+        order: 2;
+        max-height: 100vh;
+    }
+}
+
+/* Very Large Screens */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1800px;
+        margin: 0 auto;
+    }
 } 
