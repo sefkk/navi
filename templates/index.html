@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaviSim</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="header">
+                <h2>NaviSim</h2>
+            </div>
+
+            <div class="buttons-div">
+                <button id="generate-map-btn">Generate Map</button>
+
+                <div class="chosing-area">
+
+                    <h3>Choose travel mode</h3>
+
+                    <div class="radio-inputs travel-mode-choice">
+                        <label class="radio">
+                            <input type="radio" name="vehicle_type" value="car" checked="">
+                            <span class="name">Car</span>
+                        </label>
+
+                        <label class="radio">
+                            <input type="radio" name="vehicle_type" value="taxi">
+                            <span class="name">Taxi</span>
+                        </label>
+
+                        <label class="radio">
+                            <input type="radio" name="vehicle_type" value="public-transport">
+                            <span class="name">Public Transport</span>
+                        </label>
+
+                        <label class="radio">
+                            <input type="radio" name="vehicle_type" value="walking">
+                            <span class="name">Walking</span>
+                        </label>
+                    </div>
+
+                    <h3>Choose algorithm</h3>
+
+                    <div class="radio-inputs algorithm-choice">
+
+                        <label class="radio">
+                            <input type="radio" name="algorithm" value="dijkstra" checked> <span class="name">dijkstra</span>
+                        </label>
+
+                        <label class="radio">
+                            <input type="radio" name="algorithm" value="a_star"> <span class="name">a*</span>
+                        </label>
+
+                    </div>
+
+                    <h3>Choose Priority</h3>
+
+                    <div class="radio-inputs priority">
+
+                        <label class="radio">
+                            <input type="radio" name="priority" value="distance" checked> <span class="name">Distance</span>
+                        </label>
+
+                        <label class="radio">
+                            <input type="radio" name="priority" value="time"> <span class="name">Time</span>
+                        </label>
+
+                        <label class="radio">
+                            <input type="radio" name="priority" value="cost"> <span class="name">Cost</span>
+                        </label>
+                        
+                    </div>
+                </div>
+
+                <button id="find-path-btn">Calculate Path</button>
+            </div>
+
+            <div class="results" id="results">
+                <h3>Path Details</h3>
+                <p><strong>Distance:</strong> <span id="distance">--</span></p>
+                <p><strong>Time:</strong> <span id="time">--</span></p>
+                <p><strong>Cost:</strong> <span id="cost">--</span></p>
+            </div>
+
+            <div class="reset-path">
+                <button id="reset-path-btn">Reset Path</button>
+            </div>
+
+            <div class="legend">
+                <h4>Legend</h4>
+                <div class="legend-container">
+                    <div class="legend-row">
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#2b2727ff"></div>
+                            <span>Highway (Thicker)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#757171ff"></div>
+                            <span>Regular Road (Thinner)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#3F84D9;"></div>
+                            <span>Path</span>
+                        </div>
+                    </div>
+                    <div class="legend-row traffic-row">
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#8B0000"></div>
+                            <span>Extreme Traffic</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#D64124"></div>
+                            <span>Very High Traffic</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#DBAE25"></div>
+                            <span>High Traffic</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#4a922eff"></div>
+                            <span>Moderate Traffic</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background:#5dcc2aff"></div>
+                            <span>Low Traffic</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="right">
+            <p class="on-canvas visible">Welcome to Navi! You can try different path-finding algorithms with different travel modes and priorities. <br><br> Some remarks are: Not all roads are walkable, so walking mode may not always find a path. Same goes with public transport. <br><br> The map may sometimes contain isolated nodes which can never find a path. <br><br> 
+            Just press "Generate Map" and start the journey, to try different variations on the same map, you can just reset path and calculate a new path. <br><br> Enjoy! <br><br><br><br><br><br> <span class="ending"> For all questions and inquiries: <span class="gmail">orkunsefik@gmail.com</span> </span> </p>
+            <canvas class="map"></canvas>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>

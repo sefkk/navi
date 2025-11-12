@@ -1,0 +1,338 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #191919;
+    background-size: 40px 40px; 
+    background-position: -19px -19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background-image: radial-gradient(rgb(0, 0, 0) 2px, transparent 0); */
+}
+
+/* Grid Layout */
+.container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 2fr;
+    width: 95%;
+    height: 95%;
+    gap: 10px;
+}
+
+/* Left Side */
+.left {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    background: #f0f0f0;
+    border-radius: 10px;
+    border: 1px solid #c7c7c7;
+    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+.left:hover {
+    box-shadow: 12px 24px 36px rgba(0, 0, 0, 0.35);
+}
+  
+.header {
+    margin-top: 15px; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2em;
+}
+
+h2 {
+    color: #332655;
+    font-weight: 900;
+    font-size: 2.5em;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 10px;
+}
+
+.buttons-div {
+    margin-top: 20px; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
+    width: 80%; 
+}
+
+.results {
+    margin-top: 30px; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
+    width: 80%;
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+button {
+    margin-top: 5px;
+    width: 40%;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #332655;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #554477;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    background-color: #7766aa;
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.chosing-area {
+    margin-top: 1px; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px; 
+    width: 80%; 
+    padding: 10px; 
+    border-radius: 10px; 
+}
+
+h3 {
+    color: #332655;
+    font-weight: 700;
+    font-size: 1.5em;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #a3a3a3;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 300px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.radio-inputs .radio input {
+    display: none;
+}
+
+.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgb(37, 45, 56);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.radio-inputs .radio .name:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.radio-inputs .radio input:checked + .name {
+    background-color: #fff;
+    font-weight: 600;
+    transform: scale(1.02);
+}
+
+#reset-path-btn {
+    width: 100% !important;
+    margin-left: -5%;
+}
+
+/* Legend */
+.legend {
+    background-color: #4a4a4a; /* Darker background for better contrast */
+    border-radius: 8px;
+    padding: 15px;
+    color: #f0f0f0; /* Lighter text color */
+    font-family: Arial, sans-serif;
+    width: 95%; /* Adjust width to content */
+    margin: 5px auto; /* Center the legend */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.legend:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.legend h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.2em;
+}
+
+.legend-container {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    gap: 10px; /* Space between the two rows */
+}
+
+.legend-row {
+    display: flex;
+    justify-content: space-between; /* Evenly space items in a row */
+    gap: 15px; /* Space between items in the same row */
+    flex-wrap: wrap; /* Allow items to wrap if screen is too small */
+}
+
+.traffic-row {
+    /* For the traffic row, we might want to ensure a more even distribution
+       or a minimum width to prevent squishing on smaller screens. */
+    justify-content: flex-start; /* Align traffic items to the start */
+    gap: 10px; /* Adjust gap for traffic items */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Prevent text from wrapping */
+    font-size: 0.9em;
+}
+
+.color-box {
+    width: 20px;
+    height: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle border for contrast */
+    margin-right: 8px;
+    border-radius: 3px;
+    transition: transform 0.2s ease;
+}
+
+.legend-item:hover .color-box {
+    transform: scale(1.2);
+}
+
+.legend-item span {
+    /* Optional: further style the text */
+    color: #e0e0e0;
+}
+
+
+/* Right Side */
+.right {
+    background: black;
+    border-radius: 10px;
+    overflow-y: auto;
+    border: 1px solid #c7c7c7;
+    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.3);
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* .hidden {
+    display: none;
+} */
+
+.on-canvas.visible{
+    border-radius: 12px;
+    position: absolute;
+    font-size: 1.2em;
+    padding: 20px;
+    text-align: left; 
+    max-width: 60%;
+    line-height: 1.5em;
+    color: rgb(200, 200, 200);
+    background-color: #332655 !important;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.on-canvas.hidden {
+    display: none;
+    animation: fadeOut 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.ending {
+    color: rgb(200, 200, 200); 
+}
+
+.gmail {
+    font-weight: bold;
+    color: rgb(240, 240, 240);
+    text-decoration: underline; 
+}
+
+.map {
+    background-color: #332655 !important;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+    cursor: crosshair;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: smooth;
+    -ms-interpolation-mode: bicubic;
+}
+
+.map:hover {
+    opacity: 0.98;
+} 
